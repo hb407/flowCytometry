@@ -4,8 +4,8 @@
 
 rm(list=ls())
 
-myDataDir <- "C:\\Users\\Laura\\Desktop\\bCellData\\"
-myCodeDir <- "C:\\Users\\Laura\\Desktop\\git\\flowCytometry\\"
+myDataDir <- "/Users/hughburton/code/flowCytometry/data/"
+myCodeDir <- "/Users/hughburton/code/flowCytometry/"
 
 plot.strategy = FALSE
 plot.gates = FALSE
@@ -18,13 +18,13 @@ library(openCyto)
 options(warn=-1)
 dir.create(file.path(myDataDir,"gatedDataFrames"))
 dir.create(file.path(myDataDir,"figures"))
-source(paste(myCodeDir,"\\src\\functions.R",sep=""))
+source(paste(myCodeDir,"/src/functions.R",sep=""))
 
 folderFiles <- list.files(myDataDir,pattern=".fcs")
 
 ## READ IN T CELL GATING TEMPLATES
 ##################################
-bcell.gating.template <- gatingTemplate(paste(myCodeDir,"gatingTemplates\\","gatingtemplate_bcell.csv",sep=""))
+bcell.gating.template <- gatingTemplate(paste(myCodeDir,"gatingTemplates/","gatingtemplate_bcell.csv",sep=""))
 
 for (i in c(1:length(folderFiles))){
   
@@ -77,20 +77,20 @@ for (i in c(1:length(folderFiles))){
   subsets <- getNodes( samples.gating.set, order="bfs", path="auto")
   df <- get.underlying.data( subsets[4:length(subsets)], samples.gating.set, metadata)
   write.csv(df,
-            file = paste(myDataDir,"gatedDataFrames\\",gsName,".csv", sep=""),
+            file = paste(myDataDir,"gatedDataFrames/",gsName,".csv", sep=""),
             row.names=FALSE,
             quote = FALSE)
   
   ## PLOT RESULTS
   ###############
   if (plot.strategy == TRUE){
-    jpeg(paste(myDataDir,"\\figures",gsName,"_strategy",'.jpg',sep=""))
+    jpeg(paste(myDataDir,"/figures",gsName,"_strategy",'.jpg',sep=""))
     plot(samples.gating.set)
     def.off()
   }
   
   if (plot.gates == TRUE){
-    jpeg(paste(myDataDir,"\\figures",gsName,"_gates",'.jpg',sep=""))
+    jpeg(paste(myDataDir,"/figures",gsName,"_gates",'.jpg',sep=""))
     plotGate(samples.gating.set[[1]],
              sample.ratio=0.5,
              #xbin=100,
