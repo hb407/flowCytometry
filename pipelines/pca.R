@@ -4,8 +4,8 @@
 
 rm(list=ls())
 
-myDataDir <- "/Users/hughburton/code/flowCytometry/data/"
-myCodeDir <- "/Users/hughburton/code/flowCytometry/"
+myDataDir <- "/Users/Alice/Desktop/FlowFiles/"
+myCodeDir <- "/Users/Alice/flowCytometry/"
 
 ## PROJECT CELL POPULATIONS
 ## IN 2-D SPACE USING PCA
